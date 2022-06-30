@@ -50,7 +50,7 @@ def get_filters():
     #Get user input for day of the week
     while True:
         day = input("Which day of the week would you like to filter by? Please enter either S, M, T, W, Th, F, Sa or 'all'.\n").lower().strip()
-        if day != "s" or "m" or "t" or "w" or "th" or "f" or "sa" or "all":
+        if day != "sunday" or "monday" or "tuesday" or "wednesday" or "thursday" or "friday" or "saturday" or "all":
             print("ERROR! INVALID ANSWER!")
             continue
         else:
@@ -71,3 +71,29 @@ def load_data(city, month, day):
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
+
+    #Load data file into a dataframe
+    df = pd.read_csv(city_data[city])
+
+    #Convert start time column to datetime
+    df["Start Time"] = pd.to_datetime(df["Start Time"])
+
+    #Extract month and day of week from start time column to create new columns
+    df["month"] = df["Start Time"].dt.month
+    df["day_of_week"] = df["Start Time"].dt.weekday_name
+
+    #Filter by month if applicable
+    if month != "all":
+        #Use index of the months list to get corresponding int
+        months = ["January,", "February", "March", "April", "May", "June"]
+        month = months.index(month) + 1
+
+        #Filter by month to create the new dataframe
+        df = df[df["month"] == month]
+
+    #Filter by week if applicable
+    if day != "all":
+        #Filter by day of the week to create the new dataframe
+        df = df[df["day_of_week"] == day.title()]
+    
+    return df
