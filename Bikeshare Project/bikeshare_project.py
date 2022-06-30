@@ -168,3 +168,40 @@ def user_stats(df):
     """
     Displays statistics on bikeshare users.
     """
+
+    print("Calculating user statistics...\n")
+    start_time = time.time()
+
+    #Display counts of user types
+    user_types = df["User Type"].value_counts()
+    print(f"User Types:\n {user_types}")
+
+    #Display counts of gender
+    try:
+        gender_types = df["Gender"].value_counts()
+        print(f"Gender Types:\n {gender_types}")
+    except KeyError:
+        print("Gender Types: NO DATA AVAILABLE FOR THIS MONTH.")
+    
+    #Display earliest, most recent, and most common birth year
+    try:
+        earliest = df["Birth Year"].min()
+        print(f"Earliest Birth Year: {earliest}")
+    except KeyError:
+        print("Earliest Birth Year: NO DATA AVAILABLE FOR THIS MONTH.")
+    
+    try:
+        recent = df["Birth Year"].max()
+        print(f"Most Recent Birth Year: {recent}")
+    except KeyError:
+        print("Most Recent Birth Year: NO DATA AVAILABLE FOR THIS MONTH.")
+    
+    try:
+        avg_birth_year = df["Birth Year"].value_counts().idxmax()
+        print(f"Most Common Birth Year: {avg_birth_year}")
+    except KeyError:
+        print("Most Common Birth Year: NO DATA AVAILABLE FOR THIS MONTH.")
+    
+    print("This took %s seconds." % (time.time() - start_time))
+    print("-"*40)
+
