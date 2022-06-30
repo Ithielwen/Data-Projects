@@ -10,6 +10,7 @@ Student: Emma Hungrige
 import time
 import pandas as pd
 
+
 #CSV Variable
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
@@ -85,7 +86,7 @@ def load_data(city, month, day):
 
     #Extract month and day of week from start time column to create new columns
     df["month"] = df["Start Time"].dt.month
-    df["day_of_week"] = df["Start Time"].dt.weekday_name
+    df["day_of_week"] = df["Start Time"].dt.day_name()
     df["hour"] = df["Start Time"].dt.hour
 
     #Filter by month if applicable
