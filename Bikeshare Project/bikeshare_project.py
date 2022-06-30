@@ -205,3 +205,18 @@ def user_stats(df):
     print("This took %s seconds." % (time.time() - start_time))
     print("-"*40)
 
+def main():
+    while True:
+        city, month, day = get_filters()
+        df = load_data(city, month, day)
+
+        time_stats(df)
+        station_stats(df)
+        trip_duration_stats(df)
+        user_stats(df)
+
+        restart = input("Would you like to start over? Y or N?\n").lower().strip()
+        if restart != 'y':
+            break
+
+  
