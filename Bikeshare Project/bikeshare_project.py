@@ -219,4 +219,5 @@ def main():
         if restart != 'y':
             break
 
-  
+if __name__ == "__main__":
+    main() 
