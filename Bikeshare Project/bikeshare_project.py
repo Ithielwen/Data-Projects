@@ -11,7 +11,9 @@ import time
 import pandas as pd
 
 #CSV Variable
-city_data = { 'Chicago': 'chicago.csv', 'New York City': 'new_york_city.csv', 'Washington': 'washington.csv'}
+CITY_DATA = { 'Chicago': 'chicago.csv',
+              'New York City': 'new_york_city.csv',
+              'Washington': 'washington.csv' }
 
 #Definitions
 def get_filters():
@@ -72,7 +74,7 @@ def load_data(city, month, day):
     """
 
     #Load data file into a dataframe
-    df = pd.read_csv(city_data[city])
+    df = pd.read_csv(CITY_DATA[city])
 
     #Convert start time column to datetime
     df["Start Time"] = pd.to_datetime(df["Start Time"])
