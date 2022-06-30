@@ -33,7 +33,7 @@ def get_filters():
     while True:
         city = input("Which city would you like to filter by? Please enter either New York City, Chicago, or Washington.\n").lower().strip()
 
-        if city != "new york city" or "chicago" or "washington":
+        if city not in ("new york city", "chicago", "washington"):
             print("ERROR! INVALID ANSWER.")
             continue
         else:
@@ -42,7 +42,7 @@ def get_filters():
     #Get user input for month
     while True:
         month = input("Which month would you like to filter by? Please enter January, February, March, April, May, June, or 'all' if you do not have any preference.\n").lower().strip()
-        if month != "january" or "february" or "march" or "april" or "may" or "june" or "all":
+        if month not in ("january", "february", "march", "april", "may", "june", "all"):
             print("ERROR! INVALID ANSWER.")
             continue
         else:
@@ -50,8 +50,8 @@ def get_filters():
     
     #Get user input for day of the week
     while True:
-        day = input("Which day of the week would you like to filter by? Please enter either S, M, T, W, Th, F, Sa or 'all'.\n").lower().strip()
-        if day != "sunday" or "monday" or "tuesday" or "wednesday" or "thursday" or "friday" or "saturday" or "all":
+        day = input("Which day of the week would you like to filter by? Please enter either Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or 'all'.\n").lower().strip()
+        if day not in ("sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "all"):
             print("ERROR! INVALID ANSWER!")
             continue
         else:
