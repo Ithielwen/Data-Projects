@@ -8,6 +8,7 @@ Student: Emma Hungrige
 
 #Import Section
 import time
+from tracemalloc import start
 import pandas as pd
 import numpy as np
 
@@ -145,3 +146,22 @@ def station_stats(df):
     print("This took %s seconds." % (time.time() - start_time))
     print("-"*40)
 
+def trip_duration_stats(df):
+    """
+    Displays statistics on the total and average trip durations.
+    """
+    print("Calculating trip durations...\n")
+    start_time = time.time()
+
+    #Display total travel time
+    total_travel_time = sum(df["Trip Duration"])
+    print(f"Total Travel Time: {total_travel_time/86400} days.")
+
+    #Display mean travel time
+    avg_travel_time = df["Trip Duration"].mean()
+    print(f"Average Travel Time: {avg_travel_time/60} minutes.")
+
+    print("This took %s seconds." % (time.time() - start_time))
+    print("-"*40)
+
+    
