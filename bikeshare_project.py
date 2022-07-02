@@ -210,6 +210,24 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def raw_data(df):
+    """
+    Displays raw data on user request.
+
+    Arguments:
+        df (DataFrame) - Pandas DataFrame containing city data filtered by month and day
+    """
+
+    print(df.head())
+    next = 0
+
+    while True:
+        see_raw_data = input("Would you like to view the next five rows of raw data? Y or N.\n").lower().strip()
+        if see_raw_data != "y":
+            return
+        next = next + 5
+        print(df.iloc[next:next+5])
+
 def main():
     while True:
         city, month, day = get_filters()
@@ -220,6 +238,13 @@ def main():
         trip_duration_stats(df)
         user_stats(df)
 
+        while True:
+            see_raw_data = input("Would you like to view the first five rows of data? Y or N.\n ").lower().strip()
+            if see_raw_data != "y":
+                break
+            raw_data(df)
+            break
+    
         restart = input("Would you like to start over? Y or N?\n").lower().strip()
         if restart != 'y':
             break
