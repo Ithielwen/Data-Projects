@@ -41,7 +41,6 @@ The written script provides the following information:
   c. Earliest, most recent, and most common birth year (only available for NYC and Chicago)
 
 # How to Run the Project
-Download zipped folder
 Run python bikeshare_project.py
   
 # References
