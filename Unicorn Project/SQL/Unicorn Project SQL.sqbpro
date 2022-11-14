@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/butch/OneDrive/Documents/Data Analyst Program/Data-Projects/Unicorn Data/Unicorn-1.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1771"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,9:maincustomers"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="customers" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="88"/><column index="2" value="144"/><column index="3" value="133"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="Q1">SELECT COUNT(customer_id)
+FROM customers;</sql><sql name="Q3">SELECT orders.shipping_city, SUM(order_details.order_profits), SUBSTR(orders.order_date, -4, 4)
+FROM orders
+JOIN order_details
+	ON orders.order_id = order_details.order_id
+WHERE SUBSTR(orders.order_date, -4, 4) LIKE '%2015%'
+GROUP BY orders.shipping_city
+ORDER BY SUM(order_details.order_profits) DESC;
+
+</sql><sql name="Q5">SELECT shipping_city, shipping_state
+FROM orders
+GROUP BY 1
+</sql><sql name="Q7">SELECT orders.customer_id, SUM(order_details.order_sales)
+FROM orders
+JOIN order_details
+	ON orders.order_id = order_details.order_id
+GROUP BY orders.customer_id
+ORDER BY SUM(order_details.order_sales) ASC</sql><sql name="Q9">SELECT orders.shipping_city, orders.shipping_state, SUM(order_details.order_profits)
+FROM orders
+JOIN order_details
+	ON orders.order_id = order_details.order_id
+WHERE orders.shipping_state = &quot;Tennessee&quot;
+GROUP BY orders.shipping_city, orders.shipping_state
+ORDER BY SUM(order_details.order_profits) DESC</sql><sql name="Q11">SELECT orders.order_id, SUBSTR(orders.order_date, -4, 4), orders.shipping_city, orders.shipping_state, SUM(order_details.order_profits)
+FROM orders
+JOIN order_details
+	ON orders.order_id = order_details.order_id
+WHERE orders.shipping_city LIKE '%Lebanon%' AND orders.shipping_state LIKE '%Tennessee%'
+GROUP BY orders.order_date
+ORDER BY orders.order_date DESC</sql><sql name="Q13">SELECT customer_segment, COUNT(customer_segment)
+FROM customers
+GROUP BY customer_segment</sql><sql name="Q15">SELECT orders.shipping_state, SUBSTR(orders.order_date, -4, 4), product.product_category, AVG(order_details.order_profits)
+FROM orders
+JOIN order_details
+	ON orders.order_id = order_details.order_id
+JOIN product
+	ON order_details.product_id = product.product_id
+WHERE orders.shipping_state LIKE '%Iowa%'
+GROUP BY product.product_category 
+</sql><sql name="Q17">Select p.product_name as name, SUM(od.quantity) as quantity, p.product_category as category, o.shipping_date as year
+FROM orders o
+Join order_details od
+ON o.order_id = od.order_id
+JOIN product p
+ON p.product_id = od.product_id
+Where o.shipping_date like '%2016%' And category is 'Furniture'
+Group by name
+Order by quantity Desc</sql><sql name="Q19">SELECT c.customer_name,c.customer_id,(SUM(od.order_sales) / (1 - AVG(od.order_discount)))- SUM(od.order_sales) as discount_total
+FROM customers c
+JOIN orders o
+  ON c.customer_id = o.customer_id
+JOIN order_details od
+  ON o.order_id = od.order_id
+  GROUP BY c.customer_id
+  ORDER BY discount_total DESC</sql><sql name="Q21">WITH t1 AS (
+  SELECT CAST(SUBSTRING(o.order_date, INSTR(o.order_date,'/')-2, 2) AS int) AS month
+    , SUM(od.order_profits) AS total_profits
+  FROM order_details AS od
+  JOIN orders AS o
+    ON o.order_id = od.order_id
+  WHERE order_date LIKE &quot;%2018&quot;
+  GROUP BY SUBSTRING(o.order_date, INSTR(o.order_date,'/')-2, 2)
+  ORDER BY month
+  )
+SELECT month
+  , total_profits
+  , LAG(total_profits, 1, 0) OVER(ORDER BY month) AS prev_profit
+  , total_profits - LAG(total_profits, 1, 0) OVER(ORDER BY month) AS profit_diff
+FROM t1</sql><sql name="Q23">SELECT o.order_id, o.order_date, od.order_sales
+FROM orders o
+JOIN order_details od
+ON o.order_id = od.order_id
+WHERE o.order_date LIKE '%2015'
+ORDER BY 3 DESC</sql><sql name="Q25">SELECT shipping_city AS city,
+	SUM(quantity) AS amount_ordered,
+	RANK() OVER(ORDER BY SUM(quantity) DESC) AS rank
+FROM orders
+JOIN order_details
+	ON orders.order_id = order_details.order_id
+WHERE order_date LIKE '%2015%'
+	AND shipping_region = 'East'
+GROUP BY 1</sql><sql name="Q27">SELECT customers.customer_id, customers.customer_name, 
+	customers.customer_segment, orders.order_id, orders.order_date, 
+	orders.shipping_city, orders.shipping_state, orders.shipping_region,
+	orders.shipping_country, orders.shipping_postal_code, orders.shipping_date,
+	orders.shipping_mode, order_details.order_details_id, order_details.product_id,
+	order_details.quantity, order_details.order_discount, order_details.order_profits,
+	order_details.order_profit_ratio, order_details.order_sales, product.product_name,
+	product.product_category, product.product_subcategory, product.product_manufacturer
+FROM customers
+JOIN orders
+	ON customers.customer_id = orders.customer_id
+JOIN order_details
+	ON orders.order_id = order_details.order_id
+JOIN product
+	ON order_details.product_id = product.product_id</sql><current_tab id="13"/></tab_sql></sqlb_project>
