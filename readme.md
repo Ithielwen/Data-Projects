@@ -15,3 +15,6 @@ In this project, you will analyze real life data fron the New York Stock exchang
 
 # [Unicorn Project](https://github.com/Ithielwen/Data-Projects/tree/main/Unicorn%20Project)
 Unicorn is a family business and is owned by two owners who are very invested in their business. They already have a small data analytics team but want to expand it significantly in the next few months. They see you as a candidate for DA position and are providing you with a sample dataset from their sales data. Your task is to analyze the data, find interesting insights and identify weak areas and opportunites for Unicorn to boost their business growth.
+
+# [Twitter Project](https://github.com/Ithielwen/Data-Projects/tree/main/Twitter%20Project)
+Using Python and its libraries, you will gather data from a variety of sources and in a variety of formats, assess its quality and tidiness, then clean it. You will document your wrangling efforts in a Jupyter Notebook, plus showcase them through analyses and visualizations using Python (and its libraries) and/or SQL.
