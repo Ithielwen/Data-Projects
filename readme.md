@@ -18,3 +18,6 @@ Unicorn is a family business and is owned by two owners who are very invested in
 
 # [Twitter Project](https://github.com/Ithielwen/Data-Projects/tree/main/Twitter%20Project)
 Using Python and its libraries, you will gather data from a variety of sources and in a variety of formats, assess its quality and tidiness, then clean it. You will document your wrangling efforts in a Jupyter Notebook, plus showcase them through analyses and visualizations using Python (and its libraries) and/or SQL.
+
+# [Prosper Loan Exploratory Project](https://github.com/Ithielwen/Data-Projects/tree/main/Prosper%20Loan%20Exploratory%20Project)
+This project has two parts that demonstrate the importance and value of data visualization techniques in the data analysis process. In the first part, you will use Python visualization libraries to systematically explore a selected dataset, starting from plots of single variables and building up to plots of multiple variables. In the second part, you will produce a short presentation that illustrates interesting properties, trends, and relationships that you discovered in your selected dataset. The primary method of conveying your findings will be through transforming your exploratory visualizations from the first part into polished, explanatory visualizations.
